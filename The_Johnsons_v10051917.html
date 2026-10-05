@@ -1865,7 +1865,7 @@ function renderRail(x){
   const s=x.s;const long=(s.say||'').length>330;const ov=shownOverlays(x);
   const prevScroll=(S.railFor===s.id&&$('#fRail .rbody'))?$('#fRail .rbody').scrollTop:0;S.railFor=s.id;
   $('#fRail').innerHTML=`<div class="rbody"><div class="stepnum">${esc(railLabel(x))}</div><h1>${esc(s.title)}</h1>
-   ${s.say?`<div class="saylab">Say this</div><div class="say ${long?'long':''}">${rich(s.say)}</div>`:''}
+   ${s.say?`<div class="say ${long?'long':''}">${rich(s.say)}</div>`:''}
    ${s.moments.length?`<div class="room${CV&&CV.stepId===s.id?' convo':''}"><div class="roomhead">${isMS(s)?'In their words':'In the room'}</div>${CV&&CV.stepId===s.id?'<div id="rcv"></div>':''}${S.hl==='cue'&&ov.some(o=>o.n)?'<div class="cuehint">Point to a moment to show it on the screen. Click to keep it on.</div>':''}<div class="mlist">${CV&&CV.stepId===s.id?'<div class="spine"><i></i></div>':''}${s.moments.map(m=>`<div class="moment${S.hl==='cue'&&m.n&&ov.some(o=>o.n===m.n)?' cueable':''}${S.cuePin.has(m.n)?' pinned':''}" data-n="${esc(m.n||'')}"><div class="n ${/^\d+$/.test(m.n||'')?'':'s'}">${esc(m.n||'•')}</div><div>${m.quote?`<div class="q">“${esc(m.quote)}”</div>`:''}<div class="by">${esc([m.who,m.time].filter(Boolean).join(', '))}</div>${m.does?`<div class="does">${rich(m.does)}</div>`:''}</div></div>`).join('')}</div></div>`:''}
    </div>${s.why?`<div class="why"><div class="wt">Why this matters</div><div class="wb">${rich(s.why)}</div></div>`:''}`;
   const rb=$('#fRail .rbody');rb.scrollTop=prevScroll;railFade();rb.onscroll=railFade;
